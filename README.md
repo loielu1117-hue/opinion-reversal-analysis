@@ -70,24 +70,27 @@
 ## 📁 项目目录结构
 
 ```text
-├── data/                     # 原始数据与中间结果
-│   ├── raw/                  # 爬虫原始CSV（知乎回答）
-│   └── processed/            # 清洗后数据 + 情感得分标注
-│
-├── src/                      # 核心源代码
-│   ├── 1_spider.py           # 知乎爬虫脚本
-│   ├── 2_preprocess.py       # 数据清洗 + jieba分词 + 自定义词典
-│   ├── 3_sentiment.py        # SnowNLP模型训练 + 情感打分
-│   ├── 4_topic_modeling.py   # LDA主题建模 + 困惑度评估
-│   ├── 5_visualization.py    # 时序图 / 箱线图 / 词云图绘制
-│   └── 6_stat_analysis.py    # 相关性检验 + Jaccard相似度计算
-│
-├── results/                  # 输出结果
-│   ├── figures/              # 论文中的全部图表（PNG/SVG）
-│   └── tables/               # 主题分布表、混淆矩阵等
-│
-├── requirements.txt          # Python依赖库清单
-└── README.md                 # 项目说明（本文件）
+opinion-reversal-analysis/
+├── README.md
+├── .gitignore
+├── LICENSE
+├── requirements.txt
+└── src/
+    ├── pangmao/
+    │   ├── pangmao_spider.py
+    │   ├── pangmao_preprocess.py
+    │   ├── pangmao_sentiment.py
+    │   ├── pangmao_analysis_viz.py      
+    │   ├── pangmao_sentiment_stats_viz.py 
+    │   └── pangmao_topic_modeling.py
+    │
+    └── limingde/
+        ├── mingde_spider.py
+        ├── mingde_preprocess.py
+        ├── mingde_sentiment.py
+        ├── mingde_analysis.py            
+        ├── mingde_viz.py                 
+        └── mingde_topic_modeling.py
 ```
 
 ## 🚀 快速开始
@@ -103,27 +106,45 @@ pip install -r requirements.txt
 ### 运行顺序
 
 ```bash
-cd src
+# ===== 胖猫事件 =====
+cd src/pangmao
 
-# 1. 爬取数据（需配置Cookie/Headers）
-python 1_spider.py
+# 1. 爬取数据
+python pangmao_spider.py
 
 # 2. 预处理
-python 2_preprocess.py
+python pangmao_preprocess.py
 
-# 3. 情感分析（含模型训练）
-python 3_sentiment.py
+# 3. 情感分析
+python pangmao_sentiment.py
 
-# 4. 主题建模
-python 4_topic_modeling.py
+# 4. 可视化（时序图、箱线图等）
+python pangmao_analysis_viz.py
+python pangmao_sentiment_stats_viz.py
 
-# 5. 生成可视化图表
-python 5_visualization.py
+# 5. 主题建模
+python pangmao_topic_modeling.py
 
-# 6. 统计检验
-python 6_stat_analysis.py
+# ===== 李明德事件 =====
+cd ../limingde
+
+# 1. 爬取数据
+python mingde_spider.py
+
+# 2. 预处理
+python mingde_preprocess.py
+
+# 3. 情感分析
+python mingde_sentiment.py
+
+# 4. 可视化
+python mingde_analysis.py
+python mingde_viz.py
+
+# 5. 主题建模
+python mingde_topic_modeling.py
 ```
-注意：由于知乎反爬策略，1_spider.py 可能需要更新 Cookie 或使用离线数据。已将清洗后的CSV文件存放于 data/processed/ 下，可跳过爬虫步骤直接运行后续脚本。
+注意：由于知乎反爬策略，spider.py 可能需要更新 Cookie 或使用离线数据。已将清洗后的CSV文件存放于 data/processed/ 下，可跳过爬虫步骤直接运行后续脚本。
 
 ## 📚 技术栈
 
