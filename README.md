@@ -96,8 +96,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/loielu1117-hue/-.git
-
+git clone https://github.com/loielu1117-hue/opinion-reversal-analysis.git
 # 安装依赖
 pip install -r requirements.txt
 ```
