@@ -96,7 +96,7 @@
 
 ```bash
 # 克隆仓库
-git clone git clone https://github.com/loielu1117-hue/main.git
+git clone https://github.com/loielu1117-hue/-.git
 
 # 安装依赖
 pip install -r requirements.txt
